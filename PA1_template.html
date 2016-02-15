@@ -64,7 +64,7 @@ img {
 </div>
 
 
-<p>Load packages</p>
+<p>Load Necessary packages</p>
 <pre class="r"><code>library(knitr)</code></pre>
 <pre><code>## Warning: package 'knitr' was built under R version 3.2.3</code></pre>
 <pre class="r"><code>library(lubridate)</code></pre>
@@ -154,7 +154,10 @@ plot(steps_interval$interval, steps_interval$steps, col=&quot;red&quot;,
 <p>Answer = 835th interval</p>
 <p>Imputing missing data 1. Total number of missing values in data</p>
 <pre class="r"><code>MissingValues &lt;- length(which(is.na(data$steps)))</code></pre>
-<p>Number of missing values =2304 2. We will use average number of steps in the same 5 Min interval to fill out NA values</p>
+<p>Number of missing values =2304</p>
+<ol start="2" style="list-style-type: decimal">
+<li>We will use average number of steps in the same 5 Min interval to fill out NA values</li>
+</ol>
 <pre class="r"><code>data_full &lt;- data
 nas &lt;- is.na(data_full$steps)
 avg_interval &lt;- tapply(data_full$steps, data_full$interval, mean, na.rm=TRUE, simplify=TRUE)</code></pre>
@@ -212,7 +215,9 @@ head(data_full)</code></pre>
 ## 4 0.1509434 2012-10-01       15  weekday
 ## 5 0.0754717 2012-10-01       20  weekday
 ## 6 2.0943396 2012-10-01       25  weekday</code></pre>
-<p>Creating the panel plot for weekdays and weekends</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Creating the panel plot for weekdays and weekends</li>
+</ol>
 <pre class="r"><code>interval_full &lt;- data_full %&gt;%  group_by(interval, weektype) %&gt;%  summarise(steps = mean(steps))
 p &lt;- ggplot(interval_full, aes(x=interval, y=steps, color = weektype)) +
   geom_line() +
