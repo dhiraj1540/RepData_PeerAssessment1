@@ -14,7 +14,7 @@ library(ggplot2)
 
 
 Loading and Reprocessing the data.
-Download data if doesn't exist in current directory
+      Download data if doesn't exist in current directory
 
 
 ```r
@@ -26,14 +26,14 @@ if(!file.exists("activity")) {
 }
 ```
 
-1. Read and clean the data for analysis
+      Read and clean the data for analysis
 
 
 ```r
 activity <- read.csv("activity.csv", header = TRUE)
 ```
 
-2. Process the data for analysis
+      Process the data for analysis
  
 
 ```r
@@ -43,7 +43,7 @@ data <- tbl_df(activity)
 
 Mean and Median number of steps taken per day
 
-1. Total number of steps taken per day
+      Total number of steps taken per day
 
 
 ```r
@@ -68,7 +68,7 @@ Steps <- data %>%  filter(!is.na(steps)) %>%  group_by(date) %>%  summarize(step
 ## ..        ...   ...
 ```
 
-2. Histogram of total number of steps taken each day
+      Histogram of total number of steps taken each day
 
 
 ```r
@@ -77,7 +77,7 @@ hist(Steps$steps, col= "red", xlab="Steps Per Day", main= "Total Steps Per Day")
 
 ![plot of chunk Histogram of total number of steps taken each day](figure/Histogram of total number of steps taken each day-1.png)
 
-3. Mean of total number of steps taken per day
+      Mean of total number of steps taken per day
 
 
 ```r
@@ -88,9 +88,9 @@ print(MeanSteps)
 ```
 ## [1] 10766.19
 ```
-Answer = 10766.19
 
-Median of total number of steps taken per day
+
+    Median of total number of steps taken per day
 
 
 ```r
@@ -101,11 +101,11 @@ print(MedianSteps)
 ```
 ## [1] 10765
 ```
-Answer = 10765
+
 
 Average daily activity pattern
 
-Time series plot of the average number of steps taken
+      Time series plot of the average number of steps taken
 
 
 ```r
@@ -118,7 +118,7 @@ plot(steps_interval$interval, steps_interval$steps, col="red",
 
 ![plot of chunk Time series plot of average number of steps taken](figure/Time series plot of average number of steps taken-1.png)
 
-The 5-minute interval that, on average, contains the maximum number of steps
+      The 5-minute interval that, on average, contains the maximum number of steps
 First we filter by maximum value of steps and then record corresponding interval
 
 
@@ -135,15 +135,15 @@ intervals <- data%>% filter(!is.na(data$steps)) %>%
 Answer = 835th interval
 
 Imputing missing data
-1. Total number of missing values in data
+      Total number of missing values in data
 
 
 ```r
 MissingValues <- length(which(is.na(data$steps)))
 ```
-Number of missing values =2304
+    Number of missing values =2304
 
-2. We will use average number of steps in the same 5 Min interval to fill out NA values
+      We will use average number of steps in the same 5 Min interval to fill out NA values
 
 
 ```r
@@ -152,7 +152,7 @@ nas <- is.na(data_full$steps)
 avg_interval <- tapply(data_full$steps, data_full$interval, mean, na.rm=TRUE, simplify=TRUE)
 ```
 
-3. Creating a new data setequal to original data set but with filled missing values
+      Creating a new data setequal to original data set but with filled missing values
 
 
 ```r
@@ -164,7 +164,7 @@ sum(is.na(data_full$steps))
 ## [1] 0
 ```
 
-4. Histogram for total number of steps taken each day after imputing missing data
+      Histogram for total number of steps taken each day after imputing missing data
 
 
 ```r
@@ -199,7 +199,7 @@ ggplot(steps_full, aes(x = steps)) +  geom_histogram(fill = "firebrick", binwidt
 
 ![plot of chunk Histogram for total number of steps taken each day after imputing missing data](figure/Histogram for total number of steps taken each day after imputing missing data-1.png)
 
-Mean and median for the new data set
+      Mean and median for the new data set
 
 
 ```r
@@ -222,8 +222,9 @@ print(median_steps_full)
 
 Imputing missing data didn't affect the mean and median of our original data set.
 
+
 Activity pattern on weekdays and weekends
-1. Creating a new factor variable weektype to distinguish between weekdays and weekend data.
+      Creating a new factor variable weektype to distinguish between weekdays and weekend data.
 
 
 ```r
@@ -246,7 +247,7 @@ head(data_full)
 ## 6 2.0943396 2012-10-01       25  weekday
 ```
 
-2. Creating the panel plot for weekdays and weekends
+      Creating the panel plot for weekdays and weekends
 
 
 ```r
@@ -259,7 +260,7 @@ print(p)
 
 ![plot of chunk Panel plot for weekdays and weekends](figure/Panel plot for weekdays and weekends-1.png)
 
-Subject seems to be more active at the start of week days compared to weekends but is more active throughtout the weekedn than weekdays.
+      Subject seems to be more active at the start of week days compared to weekends but is more active throughtout the weekedn than weekdays.
 
 
 
